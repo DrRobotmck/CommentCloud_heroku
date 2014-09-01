@@ -32,6 +32,8 @@ body {
   font-family: Spinnaker;
   margin: 0;
   overflow: hidden;
+  min-height: 100%;
+  max-width: 100%;
 
   .bg {
     background: url('http://upload.wikimedia.org/wikipedia/commons/2/2b/Clouds.JPG');
