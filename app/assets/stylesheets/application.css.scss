@@ -1,0 +1,121 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import url(http://fonts.googleapis.com/css?family=Spinnaker);
+ 
+header {
+  font-family: Spinnaker;
+  font-size: 60px;
+  text-align: left;
+  position: fixed;
+  margin: -90px auto;
+  width: 1000px;
+  height: 120px;
+  font-weight: 200;
+  text-shadow: -4px 9px 25px grey;
+}
+
+body {
+  color: rgba(255,255,255,.4);
+  font-family: Spinnaker;
+  margin: 0;
+  overflow: hidden;
+
+  .bg {
+    background: url('http://upload.wikimedia.org/wikipedia/commons/2/2b/Clouds.JPG');
+    background-size: 100%;
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }   
+}
+
+#comments{
+  
+  position: fixed;
+  width: 100%;
+  height: 700px;
+  margin: 0 auto;
+  font-family: Spinnaker;
+  font-weight: 200;
+  font-size: 60px;
+  color: darkgrey;
+  z-index: -10;
+
+  section {
+    width: 90%;
+    min-height: 100%;
+    height: 100%;
+
+    .comment {
+      background: url('http://www.clicktorelease.com/code/css3dclouds/cloud.png');
+      background-size: 38%;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin: 10px 0;
+      width: 33%;
+      height:44%;
+      position: absolute; 
+      z-index: 1;
+      
+      p {
+        width: 25%;
+        margin: 20% auto;
+        font-size: 13px;
+        word-wrap: break-word;
+        line-height: 20px;
+        color: darkgrey;
+        text-align: center;
+      }
+    }
+
+  }
+}
+#embedder {
+  text-align: left;
+  width: 100%;
+  margin: 120px auto;
+  z-index: 1001;
+
+  li {
+    display: inline-block;
+    list-style-type: none;
+    text-shadow: -4px 9px 25px grey;
+  }
+  h1{
+    margin: 0 auto;
+    cursor: pointer;
+    border: 2px solid rgba(0,0,0,.1);
+    text-align: center;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    background: rgba(0,0,0,.1);
+  }
+  h1:hover {
+    background: rgba(255,255,255,.1);
+    border:2px solid rgba(255,255,255,.1);
+  }
+}
+#container {
+  font-weight: 300;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  position: absolute;
+  z-index: 1000;
+}

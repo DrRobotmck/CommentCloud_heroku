@@ -1,0 +1,35 @@
+/*Cloud Background CSS and Animations*/
+
+.fg {
+  background-size: contain;
+  position: absolute;
+  width: 5000px;
+  height: 100%;
+  -webkit-transform: translate3d(0,0,0);
+}
+
+.topdiv {
+  background: url('http://pngimg.com/upload/cloud_PNG7.png');
+  right: -3000px;
+  z-index: 4;
+  -webkit-animation: slideleft 120s ease-in-out 0s infinite alternate;
+}
+
+.bottomdiv {
+  background: url('http://38.media.tumblr.com/115388a72d4b97e4012e18fcc8eb42e6/tumblr_mkwyjhuexm1s5jjtzo1_1280.png');
+  left: -3000px;
+  top: 15px;
+  height: 100%;
+  z-index: 2;
+  -webkit-animation: slideright 120s ease-in-out 0s infinite alternate;
+}
+
+@-webkit-keyframes slideleft {
+  0%   {right:-3000px;}
+  100% {right:-500px;}
+}
+
+@-webkit-keyframes slideright {
+  0%   {left:-3000px;}
+  100% {left:-500px;}
+}
