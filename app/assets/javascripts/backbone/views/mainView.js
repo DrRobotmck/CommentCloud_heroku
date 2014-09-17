@@ -11,7 +11,7 @@ var MainView = Backbone.View.extend({
       SC.get('/me', function(user) {
       	this.user = user;
         this.collection.getTracks();
-        this.getStream();
+        setTimeout(function(){this.getStream()}.bind(this));
       }.bind(this));
     }.bind(this));
 	},
