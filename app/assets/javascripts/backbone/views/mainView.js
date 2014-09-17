@@ -25,9 +25,9 @@ var MainView = Backbone.View.extend({
   soundcloudAuth: function() {
     SC.initialize({
       client_id: '456177910e695bec31abd882ed77fedb',
-      redirect_uri: 'http://commentcloud.mckenneth.com/home',
+      // redirect_uri: 'http://commentcloud.mckenneth.com/home',
       // for development:
-      // redirect_uri: 'http://localhost:3000/home',
+      redirect_uri: 'http://localhost:3000/home',
       display: 'popup'
     });
     this.getUser();
@@ -48,14 +48,12 @@ var MainView = Backbone.View.extend({
       auto_play: true,
       // Get comments for track, create new views and start animation
       ontimedcomments: function(comments) {
-        _.each(comments, function(comment) {
-            var randomId = Math.floor(Math.random() * 3);
-            var commentView = new CommentView({ model: comment });
-            var leftShift = ($('#section').width() * Math.random() - 300) + 'px';
-            commentView.$el.css({'left': leftShift, 'top': $('#section').height() + 400 + 'px'});
-            mainView.$('#section').append(commentView.el);
-            webkitRequestAnimationFrame(commentView.animate.bind(commentView)); 
-        });
+        var randomId = Math.floor(Math.random() * 3);
+        var commentView = new CommentView({ model: comments[0] });
+        var leftShift = ($('#section').width() * Math.random() - 300) + 'px';
+        commentView.$el.css({'left': leftShift, 'top': $('#section').height() + 400 + 'px'});
+        mainView.$('#section').append(commentView.el);
+        webkitRequestAnimationFrame(commentView.animate.bind(commentView)); 
       }
     }, function(sound){
       mainView.sound = sound;
