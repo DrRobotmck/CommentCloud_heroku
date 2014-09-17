@@ -49,14 +49,12 @@ var MainView = Backbone.View.extend({
       // Get comments for track, create new views and start animation
       ontimedcomments: function(comments) {
         _.each(comments, function(comment) {
-          setTimeout(function(){
             var randomId = Math.floor(Math.random() * 3);
             var commentView = new CommentView({ model: comment });
             var leftShift = ($('#section').width() * Math.random() - 300) + 'px';
             commentView.$el.css({'left': leftShift, 'top': $('#section').height() + 400 + 'px'});
             mainView.$('#section').append(commentView.el);
             webkitRequestAnimationFrame(commentView.animate.bind(commentView)); 
-          }, 1000);
         });
       }
     }, function(sound){
