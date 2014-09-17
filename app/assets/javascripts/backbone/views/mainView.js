@@ -11,7 +11,7 @@ var MainView = Backbone.View.extend({
       SC.get('/me', function(user) {
       	this.user = user;
         this.collection.getTracks();
-        setTimeout(function(){this.getStream()}.bind(this));
+        setTimeout(function(){this.getStream()}.bind(this), 1000);
       }.bind(this));
     }.bind(this));
 	},
@@ -26,6 +26,8 @@ var MainView = Backbone.View.extend({
     SC.initialize({
       client_id: '456177910e695bec31abd882ed77fedb',
       redirect_uri: 'http://commentcloud.mckenneth.com/home',
+      // for development:
+      // redirect_uri: 'http://localhost:3000/home',
       display: 'popup'
     });
     this.getUser();
