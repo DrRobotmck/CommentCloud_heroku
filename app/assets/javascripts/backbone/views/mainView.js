@@ -2,17 +2,18 @@ var MainView = Backbone.View.extend({
 	el: '#container',
 	initialize: function() {
 		console.log('Initialized main view');
+    // Initialize soundcloud connection / Authorize app
     this.counter = 0;
-  },
-  getUser: function() {
+	},
+	getUser: function() {
     // Get user information and fill collection with user's tracks
-    SC.connect(function() {
+		SC.connect(function() {
       SC.get('/me', function(user) {
-        this.user = user;
+      	this.user = user;
         this.collection.getTracks();
       }.bind(this));
     }.bind(this));
-  },
+	},
   // DOM EVENTS
   events: {
     'click h1.start': 'soundcloudAuth',
@@ -20,7 +21,6 @@ var MainView = Backbone.View.extend({
     'click h1.next': 'nextTrack',
     'click h1.back': 'previousTrack'
   },
-  // Initialize soundcloud connection / Authorize app
   soundcloudAuth: function() {
     SC.initialize({
       client_id: '456177910e695bec31abd882ed77fedb',
@@ -28,8 +28,7 @@ var MainView = Backbone.View.extend({
       display: 'popup'
     });
     this.getUser();
-    this.getStream();
-  }
+  },
   // Get audio stream for track
   getStream: function(event) {
     if (this.$('.start').length) { 
