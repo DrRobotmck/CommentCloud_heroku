@@ -56,6 +56,7 @@ var MainView = Backbone.View.extend({
         webkitRequestAnimationFrame(commentView.animate.bind(commentView)); 
       }
     }, function(sound){
+      soundManager.stopAll();
       mainView.sound = sound;
       mainView.sound.play();
       mainView.playChecker = setInterval(function() {
@@ -77,7 +78,7 @@ var MainView = Backbone.View.extend({
     clearInterval(this.playChecker);
     if(this.sound.playState == 1) { this.sound.stop(); }
     this.counter++;
-    this.getStream();
+    if (this.sound.playState == 0) { this.getStream(); };
   },
   previousTrack: function() {
     clearInterval(this.playChecker);
