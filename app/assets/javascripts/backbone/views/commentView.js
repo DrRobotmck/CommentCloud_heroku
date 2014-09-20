@@ -10,7 +10,7 @@ CommentView = Backbone.View.extend({
   animate: function() {
     if (this.top >= -500){
       this.$el.css('top', (this.top -= 10)+ 'px');
-      this.animation = webkitRequestAnimationFrame(this.animate.bind(this))
+      this.animation = requestAnimationFrame(this.animate.bind(this))
     } else {
       cancelAnimationFrame(this.animation)
       this.$el.off();

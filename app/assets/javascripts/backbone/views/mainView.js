@@ -2,19 +2,9 @@ var MainView = Backbone.View.extend({
 	el: '#container',
 	initialize: function() {
 		console.log('Initialized main view');
-    // Initialize soundcloud connection / Authorize app
+    this.listenTo(this.collection, "reset", this.getStream);
     this.counter = 0;
-	},
-	getUser: function() {
-    // Get user information and fill collection with user's tracks
-		SC.connect(function() {
-      SC.get('/me', function(user) {
-      	this.user = user;
-        this.collection.getTracks();
-        setTimeout(function(){this.getStream()}.bind(this), 1000);
-      }.bind(this));
-    }.bind(this));
-	},
+  },
   // DOM EVENTS
   events: {
     'click h1.start': 'soundcloudAuth',
@@ -22,19 +12,29 @@ var MainView = Backbone.View.extend({
     'click h1.next': 'nextTrack',
     'click h1.back': 'previousTrack'
   },
+  getUser: function() {
+    // Get user information and fill collection with user's tracks
+    SC.connect(function() {
+      SC.get('/me', function(user) {
+        this.user = user;
+        this.collection.getTracks();
+      }.bind(this));
+    }.bind(this));
+  },
   soundcloudAuth: function() {
+    // Initialize soundcloud connection / Authorize app
     SC.initialize({
       client_id: '456177910e695bec31abd882ed77fedb',
-      // redirect_uri: 'http://commentcloud.mckenneth.com/home',
+      redirect_uri: 'http://commentcloud.mckenneth.com/home',
       // for development:
-      redirect_uri: 'http://localhost:3000/home',
+      // redirect_uri: 'http://localhost:3000/home',
       display: 'popup'
     });
     this.getUser();
   },
   // Get audio stream for track
   getStream: function(event) {
-    if (this.$('.start').length) { 
+    if (this.$('.start').length) {
       this.$('.start')
           .toggleClass('start')
           .toggleClass('play-pause')
@@ -43,7 +43,7 @@ var MainView = Backbone.View.extend({
     }
     var mainView = this;
     var track = mainView.collection.models[mainView.counter];
-    mainView.$('#track').replaceWith(HandlebarsTemplates['track'](track.toJSON()));
+    mainView.$('#track').replaceWith(new TrackView({ model: track }).el);
     SC.stream('/tracks/'+ track.get('origin').id, {
       auto_play: true,
       // Get comments for track, create new views and start animation
@@ -53,15 +53,18 @@ var MainView = Backbone.View.extend({
         var leftShift = ($('#section').width() * Math.random() - 300) + 'px';
         commentView.$el.css({'left': leftShift, 'top': $('#section').height() + 400 + 'px'});
         mainView.$('#section').append(commentView.el);
-        webkitRequestAnimationFrame(commentView.animate.bind(commentView)); 
+        requestAnimationFrame(commentView.animate.bind(commentView));
       }
     }, function(sound){
-      soundManager.stopAll();
-      mainView.sound = sound;
-      mainView.sound.play();
-      mainView.playChecker = setInterval(function() {
-        if (mainView.sound.playState == 0) { mainView.nextTrack(); }
-      }, 1000);
+      if (mainView.sound && mainView.sound.playState == 1) {
+				console.log('Already playing a track');
+      } else {
+        mainView.sound = sound;
+        mainView.sound.play();
+        mainView.playChecker = setInterval(function() {
+          if (mainView.sound.playState == 0) { mainView.nextTrack(); }
+        }, 1000);
+      }
     });
   },
   playPause: function() {
@@ -83,7 +86,7 @@ var MainView = Backbone.View.extend({
   previousTrack: function() {
     clearInterval(this.playChecker);
     if(this.sound.playState == 1) { this.sound.stop(); }
-    this.counter > 0 ? this.counter-- : this.counter; 
+    this.counter > 0 ? this.counter-=1 : this.counter;
     this.getStream();
   }
 });
