@@ -102,16 +102,16 @@ body {
   h1{
     margin: 0 auto;
     cursor: pointer;
-    border: 2px solid rgba(0,0,0,.1);
     text-align: center;
     width: 100px;
     height: 40px;
     line-height: 40px;
-    background: rgba(0,0,0,.1);
-  }
-  h1:hover {
     background: rgba(255,255,255,.1);
     border:2px solid rgba(255,255,255,.1);
+  }
+  h1:hover {
+    border: 2px solid rgba(0,0,0,.1);
+    background: rgba(0,0,0,.1);
   }
 }
 #container {

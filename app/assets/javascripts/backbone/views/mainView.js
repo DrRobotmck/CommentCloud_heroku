@@ -86,7 +86,7 @@ var MainView = Backbone.View.extend({
   previousTrack: function() {
     clearInterval(this.playChecker);
     if(this.sound.playState == 1) { this.sound.stop(); }
-    this.counter > 0 ? this.counter-=1 : this.counter;
+    this.counter > 0 ? this.counter -= 1 : this.counter;
     this.getStream();
   }
 });
