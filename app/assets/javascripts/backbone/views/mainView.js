@@ -44,7 +44,7 @@ var MainView = Backbone.View.extend({
     var mainView = this;
     var trackModel = mainView.collection.models[mainView.counter];
     var track = new TrackView({ model: trackModel });
-    SC.stream('/tracks/'+ track.get('origin').id, {
+    SC.stream('/tracks/'+ trackModel.get('origin').id, {
       auto_play: true,
       // Get comments for track, create new views and start animation
       ontimedcomments: function(comments) {
