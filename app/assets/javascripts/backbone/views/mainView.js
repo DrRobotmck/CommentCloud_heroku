@@ -42,8 +42,8 @@ var MainView = Backbone.View.extend({
       this.$el.toggleClass('active')
     }
     var mainView = this;
-    var track = mainView.collection.models[mainView.counter];
-    mainView.$('#track').replaceWith(new TrackView({ model: track }).el);
+    var trackModel = mainView.collection.models[mainView.counter];
+    var track = new TrackView({ model: trackModel });
     SC.stream('/tracks/'+ track.get('origin').id, {
       auto_play: true,
       // Get comments for track, create new views and start animation
