@@ -58,7 +58,7 @@ body {
   font-weight: 200;
   font-size: 60px;
   color: darkgrey;
-  
+
   section {
     width: 90%;
     min-height: 100%;
@@ -92,7 +92,8 @@ body {
   text-align: left;
   width: 100%;
   margin: 120px auto;
-  z-index: 1001;
+  z-index: 20;
+  position: absolute;
 
   li {
     display: inline-block;
