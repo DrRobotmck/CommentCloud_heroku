@@ -60,7 +60,11 @@ var MainView = Backbone.View.extend({
 				console.log('Already playing a track');
       } else {
         mainView.sound = sound;
-        mainView.sound.play();
+        mainView.sound.play({
+          onload: function() {
+            if (this.readyState == 2) { mainView.nextTrack(); }
+          }
+        });
         mainView.playChecker = setInterval(function() {
           if (mainView.sound.playState == 0) { mainView.nextTrack(); }
         }, 1000);
