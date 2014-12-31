@@ -24,6 +24,8 @@
 //= require_tree .
 
 $(function(){
-  var tracksCollection = new SongCollection;
-  main = new MainView({collection: tracksCollection});
+  var signInView = new SignInView;
 })
+var main;
+var tracksCollection;
+var soundcloudUser;
