@@ -14,7 +14,6 @@ var SongCollection = Backbone.Collection.extend({
 			song = user.collection[i];
 			if (song.origin.duration < 600000 && song.type.match(/t.{3}k(-r.{4}t)*/)) {
 				newTracks.push(song);
-				console.log(song)
 			}
 		}
 		this.reset(newTracks);

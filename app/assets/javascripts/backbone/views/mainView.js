@@ -4,18 +4,24 @@ var MainView = Backbone.View.extend({
 		console.log('Initialized main view');
     this.listenTo(this.collection, "reset", this.getStream);
     this.collection.getTracks();
+    console.log(this.collection)
     this.counter = 0;
     this.player = new PlayerView;
-    this.track = new TrackView;
-    this.track.listenTo(this, 'new track', this.track.render);
+    this.listenTo(this.player, 'finished', this.nextTrack);
+    this.track = new TrackView({model: new SongModel});
+  },
+  events: {
+    'click .next': 'nextTrack',
+    'click .play-pause': 'playPause',
+    'click .back': 'previousTrack'
   },
   // Get audio stream for track
   getStream: function(event) {
     var mainView = this;
     var trackModel = mainView.collection.models[mainView.counter];
-    mainView.track.model = trackModel;
+    mainView.track.model.set(trackModel.toJSON());
     mainView.player.model = null;
-    mainView.trigger('new track');
+
     SC.stream('/tracks/'+ trackModel.get('origin').id, {
       // Get comments for track, create new views and start animation
       ontimedcomments: function(comments) {
@@ -31,18 +37,20 @@ var MainView = Backbone.View.extend({
       if (!mainView.player.model) {
         console.log('new track started');
         mainView.player.model = sound;
-        mainView.listenTo(mainView.player, 'finished', mainView.getStream);
-        mainView.listenTo(mainView.player, 'next track', mainView.nextTrack);
-        mainView.listenTo(mainView.player, 'previous track', mainView.previousTrack);
         mainView.player.playSound();
       }
     });
   },
   nextTrack: function () {
-    this.counter++;
+    this.player.toggleNextTrack();
+    this.counter += 1;
     this.getStream();
   },
-  previousTrack: function() {
+  playPause: function () {
+    this.player.togglePlay();
+  },
+  previousTrack: function () {
+    this.player.togglePreviousTrack();
     this.counter > 0 ? this.counter -= 1 : this.counter;
     this.getStream();
   }
