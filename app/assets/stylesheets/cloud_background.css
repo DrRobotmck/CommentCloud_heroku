@@ -18,7 +18,7 @@
 .bottomdiv {
   background: url('http://38.media.tumblr.com/115388a72d4b97e4012e18fcc8eb42e6/tumblr_mkwyjhuexm1s5jjtzo1_1280.png');
   left: -3000px;
-  top: 15px;
+  top: 100px;
   height: 100%;
   z-index: 2;
   -webkit-animation: slideright 120s ease-in-out 0s infinite alternate;

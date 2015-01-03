@@ -7,7 +7,7 @@ var PlayerView = Backbone.View.extend({
     var player = this;
     player.model.play({
       onload: function () {
-        if (this.readyState === 2) { player.toggleNextTrack(); }
+        if (this.readyState === 2) { player.trigger('404'); }
         player.$('.play-pause').text('||');
       },
       onpause: function () {

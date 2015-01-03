@@ -19,7 +19,6 @@ var MainView = Backbone.View.extend({
   getStream: function(event) {
     var mainView = this;
     var trackModel = mainView.collection.models[mainView.counter];
-    mainView.track.model.set(trackModel.toJSON());
     mainView.player.model = null;
 
     SC.stream('/tracks/'+ trackModel.get('origin').id, {
@@ -36,8 +35,11 @@ var MainView = Backbone.View.extend({
       // Will load songs in multiple parts, prevents multiple tracks from playing.
       if (!mainView.player.model) {
         console.log('new track started');
+        console.log(sound)
         mainView.player.model = sound;
         mainView.player.playSound();
+        mainView.listenToOnce(mainView.player, '404', mainView.nextTrack.bind(mainView));
+        mainView.track.model.set(trackModel.toJSON());
       }
     });
   },
