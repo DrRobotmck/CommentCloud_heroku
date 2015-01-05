@@ -14,9 +14,9 @@ var SignInView = Backbone.View.extend({
     // Initialize soundcloud connection / Authorize app
     SC.initialize({
       client_id: '456177910e695bec31abd882ed77fedb',
-      redirect_uri: 'http://commentcloud.mckenneth.com/home',
+      redirect_uri: 'https://commentcloud.mckenneth.com/home',
       // for development:
-      // redirect_uri: 'http://localhost:3000/home',
+      // redirect_uri: 'https://localhost:3000/home',
       display: 'popup'
     });
     this.getUser();
