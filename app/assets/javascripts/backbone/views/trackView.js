@@ -5,7 +5,6 @@ var TrackView = Backbone.View.extend({
 		this.listenTo(this.model, 'change', this.render);
 	},
 	render: function() {
-		console.log(this.model.toJSON())
 		this.$el.html(HandlebarsTemplates['track'](this.model.toJSON()));
 	},
 	events: {
