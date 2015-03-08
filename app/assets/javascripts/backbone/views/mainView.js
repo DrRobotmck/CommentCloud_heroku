@@ -25,8 +25,8 @@ var MainView = Backbone.View.extend({
       // Get comments for track, create new views and start animation
       ontimedcomments: function(comments) {
         var commentView = new CommentView({ model: comments[0] });
-        var leftShift = ($('#section').width() * Math.random()) + 'px';
-        commentView.$el.css({'left': leftShift, 'top': $('#section').height() + 800 + 'px'});
+        var leftShift = (($('#section').width() - 300) * Math.random()) + 'px';
+        commentView.$el.css({'left': leftShift, 'top': $('#section').height() + 1000 + 'px'});
         mainView.$('#section').append(commentView.el);
         requestAnimationFrame(commentView.animate.bind(commentView));
       }
